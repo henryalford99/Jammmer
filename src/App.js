@@ -33,12 +33,8 @@ function App() {
   }
   
   const handleSave = () => {
-    // Extract URIs from the playlistTracks
-    const trackUris = playlistTracks.map(track => track.uri);
-    // Mock saving to Spotify (replace this with actual API call)
-    alert("Saving playlist to Spotify with URIs:", trackUris);
-    // Reset the playlist
-    setPlaylistTracks([]);
+    Spotify.savePlaylist(playlistTitle, playlistTracks);
+    setPlaylistTracks([]); // Reset the playlist
   };
 
   const handleSearch = async (e) => {
