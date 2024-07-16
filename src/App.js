@@ -9,12 +9,17 @@ function App() {
   const hardcodedTracks = MockTrackData;
 
   const [searchResultsTracks, setSearchResultsTracks] = useState(hardcodedTracks);
-  const [playlistTracks, setSavedTracks] = useState(hardcodedTracks);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistTitle, setPlaylistTitle] = useState('placeholder');
-  //const [name, setName] = useState('')d;
-  //const [artist, setArtist] = useState('');
-  //const [album, setAlbum] = useState('');
-  //const [id, setId] = useState('');
+
+  const addTrack = (track) => {
+    if (!playlistTracks.find(item => item.id === track.id)) {
+      setPlaylistTracks([...playlistTracks, track]);
+    }
+  };
+  const removeTrack = (track) => {
+    setPlaylistTracks(playlistTracks.filter(item => item.id !== track.id));
+  };
 
   return (
     <div className="App">
@@ -34,8 +39,8 @@ function App() {
       </header>
       <body>
         <h1>Jammmer</h1>
-        <SearchResults name="Search Results" tracks={searchResultsTracks}/>
-        <Playlist name={playlistTitle} tracks={playlistTracks}/>
+        <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={addTrack}/>
+        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={removeTrack}/>
       </body>
     </div>
   );
