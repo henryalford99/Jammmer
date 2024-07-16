@@ -10,15 +10,19 @@ function App() {
 
   const [searchResultsTracks, setSearchResultsTracks] = useState(hardcodedTracks);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [playlistTitle, setPlaylistTitle] = useState('placeholder');
+  const [playlistTitle, setPlaylistTitle] = useState('Playlist Name');
 
-  const addTrack = (track) => {
+  const handleAddTrack = (track) => {
     if (!playlistTracks.find(item => item.id === track.id)) {
       setPlaylistTracks([...playlistTracks, track]);
     }
   };
-  const removeTrack = (track) => {
+  const handleRemoveTrack = (track) => {
     setPlaylistTracks(playlistTracks.filter(item => item.id !== track.id));
+  };
+
+  const changePlaylistTitle = (e) => {
+    setPlaylistTitle(e.target.value)
   };
 
   return (
@@ -39,8 +43,8 @@ function App() {
       </header>
       <body>
         <h1>Jammmer</h1>
-        <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={addTrack}/>
-        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={removeTrack}/>
+        <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
+        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle}/>
       </body>
     </div>
   );

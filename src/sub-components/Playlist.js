@@ -1,10 +1,10 @@
 import React from 'react';
 import Tracklist from './Tracklist';
 
-const Playlist = ({ name, tracks, onRemoveTrack }) => {
+const Playlist = ({ name, tracks, onRemoveTrack, onTitleChange }) => {
     return (
         <div className="Playlist">
-            <h2>{name}</h2>
+            <input onChange={onTitleChange} value={name} type="text" />
             <Tracklist tracks={tracks} onRemoveTrack={onRemoveTrack} isRemovable={true}/>
         </div>
     )
