@@ -42,8 +42,9 @@ function App() {
   };
 
   const handleSearch = async (e) => {
+    e.preventDefault()
     try {
-      const searchTerm = e.target.value;
+      const searchTerm = e.target.elements.searchBox.value;
       const results = await Spotify.search(searchTerm);
       console.log('Search Results:', results);
       if (Array.isArray(results)) {
@@ -60,26 +61,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <div>
-        <h1>Jammmer</h1>
-        <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
-        <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
-        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
-      </div>
+      <h1>Jammmer</h1>
+      <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
+      <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
+      <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
     </div>
   );
 }
