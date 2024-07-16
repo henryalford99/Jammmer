@@ -2,13 +2,13 @@ const clientId = '23799668173249a7ba2696a5547d1e7c';
 const redirectUri = 'http://localhost:3000/';
 
 let accessToken;
+let userID;
 
 const Spotify = {
   getAccessToken() {
     if (accessToken) {
       return accessToken;
     }
-
     // Check for access token match in the URL
     const tokenMatch = window.location.href.match(/access_token=([^&]*)/);
     const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
@@ -26,6 +26,59 @@ const Spotify = {
       const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
       window.location = accessUrl;
     }
+  },
+  savePlaylist(playlistName, playlistTracks) {
+    const accessToken = Spotify.getAccessToken();
+    console.log(`AccessToken: ${accessToken}`); // Debug: Check access token
+
+    return fetch('https://api.spotify.com/v1/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error('Invalid response on GET username')
+      }
+      return response.json();
+    }).then(data => {
+      console.log('Data from GET username request:', data); // check data from username fetch request
+
+      return fetch(`https://api.spotify.com/v1/users/${data.id}/playlists`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name: playlistName})
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error('Invalid response on POST create new playlist')
+        }
+        return response.json();
+      }).then(data => {
+        console.log('Data from first POST create new playlist request:', data);
+
+        const arrayOfIds = playlistTracks.map(track => track.uri);
+
+        return fetch(`https://api.spotify.com/v1/users/${data.owner.id}/playlists/${data.id}/tracks`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({uris: arrayOfIds})
+        }).then(response => {
+          if (!response.ok) {
+            throw new Error('Invalid response on POST add tracks')
+          }
+          return response.json();
+        }).then(data => {
+          console.log('Data from second POST add tracks request:', data);
+        })
+      })
+    })
   },
   search(term) {
     const accessToken = Spotify.getAccessToken();
