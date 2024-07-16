@@ -1,4 +1,4 @@
-const trackList = [
+const MockTrackData = [
     {
         name: 'So Long, London',
         artist: 'Taylor Swift',
@@ -19,4 +19,4 @@ const trackList = [
     }
 ];
 
-export default trackList;
+export default MockTrackData;
