@@ -1,13 +1,119 @@
-body {
+
+
+
+body, html {
+  height: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../public/jammmerBackground.jpg'); /* Example image URL */
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: left;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+#one {
+  position: relative;
+  top: 42px;
+}
+#two {
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  padding-top: 5px;
+}
+#three {
+  position: relative;
+  bottom: 36px;
+}
+
+.App h1 {
+  margin: 20px 0;
+  color: #ed3a40;
+  font-family: Bebas Neue;
+  font-size: 50px;
+  padding: 0;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 25%;
+  height: 300px; /* Adjust height as needed */
+  padding: 20px;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 10px;
+  z-index: 1000;
+  background-color: white;
+}
+
+.searchBar button {
+  padding: 10px;
+  font-size: 1em;
+  position: sticky;
+  top: 70px;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+}
+
+.SearchResults, .Playlist {
+  flex: 1;
+  width: 100%;
+  height: 300px; /* Adjust the visible height as needed */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: rgba(86, 84, 84, 0.8);
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    justify-content: center;
+    gap: 60px; /* Add gap between components on larger screens */
+  }
+  
+  .SearchResults, .Playlist {
+    height: 500px; /* Adjust the visible height as needed */
+  }
+}
+
+

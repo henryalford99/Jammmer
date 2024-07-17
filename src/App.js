@@ -1,16 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import MockTrackData from './mock data/MockTrackData';
 import SearchResults from './sub-components/SearchResults';
 import Playlist from './sub-components/Playlist';
 import SearchBar from './sub-components/SearchBar';
 import Spotify from './sub-components/Spotify';
 
 function App() {
-  const hardcodedTracks = MockTrackData;
 
-  const [searchResultsTracks, setSearchResultsTracks] = useState(hardcodedTracks);
+  const [searchResultsTracks, setSearchResultsTracks] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistTitle, setPlaylistTitle] = useState('Playlist Name');
   const [searchTerm, setSearchTerm] = useState('')
@@ -57,10 +54,14 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Jammmer</h1>
+      <h1 id="one">Ja</h1>
+      <h1 id="two">mmm</h1>
+      <h1 id="three">er</h1>
       <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
-      <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
-      <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
+      <div className="content">
+        <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
+        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
+      </div>
     </div>
   );
 }
