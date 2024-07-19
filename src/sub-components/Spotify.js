@@ -2,7 +2,6 @@ const clientId = '23799668173249a7ba2696a5547d1e7c';
 const redirectUri = 'http://localhost:3000/';
 
 let accessToken;
-let userID;
 
 const Spotify = {
   getAccessToken() {
@@ -20,6 +19,7 @@ const Spotify = {
       // Clear the parameters from the URL
       window.setTimeout(() => accessToken = '', expiresIn * 1000);
       window.history.pushState('Access Token', null, '/');
+
       return accessToken;
     } else {
       // Redirect to Spotify authorization page
@@ -82,6 +82,9 @@ const Spotify = {
   },
   search(term) {
     const accessToken = Spotify.getAccessToken();
+    if (!accessToken) {
+      return; // Authorization is in progress, stop the search
+    }
     console.log(`AccessToken: ${accessToken}`); // Debug: Check access token
     console.log(`Search Term: ${term}`); // Debug: Check term
   

@@ -10,8 +10,14 @@ function App() {
   const [searchResultsTracks, setSearchResultsTracks] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
   const [playlistTitle, setPlaylistTitle] = useState('Playlist Name');
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isContentVisible, setIsContentVisible] = useState(false);
 
+  useEffect(() => {
+    // Trigger authorization on page load
+    Spotify.getAccessToken();
+  }, []);
+  
   const handleAddTrack = (track) => {
     if (!playlistTracks.find(item => item.id === track.id)) {
       setPlaylistTracks([...playlistTracks, track]);
@@ -36,10 +42,14 @@ function App() {
 
   const handleSearch = async (e) => {
     e.preventDefault()
+    console.log('handleSearch triggered');
+
     try {
       const searchTerm = e.target.elements.searchBox.value;
+      console.log('Search Term:', searchTerm);
       const results = await Spotify.search(searchTerm);
       console.log('Search Results:', results);
+
       if (Array.isArray(results)) {
         setSearchResultsTracks(results);
       } else {
@@ -49,7 +59,8 @@ function App() {
     } catch(error) {
       console.error('Error during search:', error);
       setSearchResultsTracks([]); // Clear tracks on error
-    }
+    };
+    setIsContentVisible(true);
   }
 
   return (
@@ -58,7 +69,7 @@ function App() {
       <h1 id="two">mmm</h1>
       <h1 id="three">er</h1>
       <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
-      <div className="content">
+      <div className="content" style={{ display: isContentVisible ? 'flex' : 'none' }}>
         <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
         <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
       </div>
