@@ -28,6 +28,11 @@ const Spotify = {
     }
   },
   savePlaylist(playlistName, playlistTracks) {
+    const defaultPlaylistName = 'My Jammmer Playlist'; // Define a default playlist name
+    if (!playlistName || playlistName.trim() === '') {
+        playlistName = defaultPlaylistName;
+    };
+    
     const accessToken = Spotify.getAccessToken();
     console.log(`AccessToken: ${accessToken}`); // Debug: Check access token
 
@@ -44,7 +49,7 @@ const Spotify = {
       return response.json();
     }).then(data => {
       console.log('Data from GET username request:', data); // check data from username fetch request
-
+      
       return fetch(`https://api.spotify.com/v1/users/${data.id}/playlists`, {
         method: 'POST',
         headers: {

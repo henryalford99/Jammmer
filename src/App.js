@@ -12,6 +12,7 @@ function App() {
   const [playlistTitle, setPlaylistTitle] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [isContentVisible, setIsContentVisible] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
 
   useEffect(() => {
     // Trigger authorization on page load
@@ -21,6 +22,7 @@ function App() {
   const handleAddTrack = (track) => {
     if (!playlistTracks.find(item => item.id === track.id)) {
       setPlaylistTracks([...playlistTracks, track]);
+      setSuccessMessage(false);
     }
   };
   const handleRemoveTrack = (track) => {
@@ -35,18 +37,18 @@ function App() {
     setSearchTerm(e.target.value);
   }
   
-  const handleSave = () => {
-    Spotify.savePlaylist(playlistTitle, playlistTracks);
+  const handleSave = async () => {
+    await Spotify.savePlaylist(playlistTitle, playlistTracks);
     setPlaylistTracks([]); // Reset the playlist
+    setPlaylistTitle(''); // Reset the title
+    setSuccessMessage(true);
   };
 
   const handleSearch = async (e) => {
     e.preventDefault()
-    console.log('handleSearch triggered');
 
     try {
       const searchTerm = e.target.elements.searchBox.value;
-      console.log('Search Term:', searchTerm);
       const results = await Spotify.search(searchTerm);
       console.log('Search Results:', results);
 
@@ -71,7 +73,7 @@ function App() {
       <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
       <div className="content" style={{ display: isContentVisible ? 'flex' : 'none' }}>
         <SearchResults name="Results:" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
-        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
+        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave} onSuccess={successMessage}/>
       </div>
     </div>
   );
