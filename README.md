@@ -56,21 +56,23 @@ jammming-app/
 ├── src/
 │   ├
 │   ├── App.js
-│   ├── SearchBar.js
-│   ├── Playlist.js
-│   ├── Track.js
-│   |── ...
-│   ├── util/
-│   │   └── spotify.js
+│   ├── reportWebVitals.js
+│   ├── setupTests.js
 │   ├── App.css
-│   ├── App.js
+│   ├── App.test.js
 │   ├── index.css
 │   └── index.js
-├── test/
-│   ├── App.test.js
-│   ├── SearchBar.test.js
-│   └── ...
-├── .eslintrc.js
+│   ├── sub-components
+|   |   └── Playlist.js
+|   |   └── SaveToSpotifyButton.js
+|   |   └── Search.js
+│   │   └── SearchBar.js
+│   │   └── SearchResults.js
+│   │   └── Spotify.js
+│   │   └── Track.js
+│   │   └── Tracklist.js
+|   │   └── spotify_logo.png
+├── package-lock.json
 ├── package.json
 ├── README.md
 └── ...
