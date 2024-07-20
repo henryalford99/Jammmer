@@ -37,6 +37,11 @@ function App() {
       newAudio.play();
       setCurrentAudio(newAudio);
       setCurrentPlayingTrack(track);
+
+      newAudio.addEventListener('ended', () => {
+        setCurrentPlayingTrack(null);
+        setCurrentAudio(null);
+      });
     }
   };
   

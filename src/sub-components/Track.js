@@ -14,7 +14,7 @@ const Track = ({ track, onAddTrack, onRemoveTrack, isRemovable, handlePlayPause,
                 <img className="track-image" src={track.image} alt={track.name} />
                 {track.preview_url && (
                     <button className="play-button" onClick={handlePlayPause}>
-                        {isPlaying ? 'Pause' : 'Play'}
+                        {isPlaying ? <span className="pause-icon"></span> : <span className="play-icon"></span>}
                     </button>
                 )}
             </div>
