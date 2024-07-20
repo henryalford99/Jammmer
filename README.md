@@ -1,3 +1,21 @@
+## Purpose
+This project allows users to search the Spotify library from their account, create a custom playlist, and save it to their Spotify account. The intention of this project was to build knowledge of React components, importing and exporting, separation of concerns, passing state, and making HTTP requests.
+
+## Technologies Used
+- React
+- JavaScript
+- HTML
+- CSS
+- Spotify API
+
+## Features
+- **Search Bar**: Filters song searches based on the user's Spotify profile.
+- **Clickable Search Results**: Users can click on search results to add them to a new playlist.
+- **Save to Spotify**: Users can save the created playlist to their Spotify account.
+
+## Future Work
+- **Web Playback SDK**: Implementing the Spotify Web Playback SDK to allow users to stream searched tracks before adding them to a new playlist.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
