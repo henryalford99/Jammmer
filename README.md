@@ -75,6 +75,7 @@ jammming-app/
 ├── package-lock.json
 ├── package.json
 ├── README.md
+├── LICENSE
 └── ...
 ```
 

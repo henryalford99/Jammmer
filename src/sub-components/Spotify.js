@@ -118,7 +118,8 @@ const Spotify = {
         artist: track.artists[0].name,
         album: track.album.name,
         uri: track.uri,
-        image: track.album.images[0].url
+        image: track.album.images[0].url,
+        preview_url: track.preview_url
       }));
     }).catch(error => {
       console.error('Fetch Error:', error); // Debug: Log fetch error

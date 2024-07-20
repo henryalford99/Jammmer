@@ -14,10 +14,31 @@ function App() {
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
 
+  const [currentAudio, setCurrentAudio] = useState(null);
+  const [currentPlayingTrack, setCurrentPlayingTrack] = useState(null);
+
   useEffect(() => {
     // Trigger authorization on page load
     Spotify.getAccessToken();
   }, []);
+  
+  const handlePlayPause = (track) => {
+    if (currentPlayingTrack && currentPlayingTrack.id === track.id) {
+      // Pause if the same track is clicked again
+      currentAudio.pause();
+      setCurrentPlayingTrack(null);
+    } else {
+      // Pause the current track if a new track is played
+      if (currentAudio) {
+        currentAudio.pause();
+      }
+      // Play the new track
+      const newAudio = new Audio(track.preview_url);
+      newAudio.play();
+      setCurrentAudio(newAudio);
+      setCurrentPlayingTrack(track);
+    }
+  };
   
   const handleAddTrack = (track) => {
     if (!playlistTracks.find(item => item.id === track.id)) {
@@ -72,8 +93,23 @@ function App() {
       <h1 id="three">er</h1>
       <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
       <div className="content" style={{ display: isContentVisible ? 'flex' : 'none' }}>
-        <SearchResults name="Results:" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
-        <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave} onSuccess={successMessage}/>
+        <SearchResults 
+          name="Results:" 
+          tracks={searchResultsTracks} 
+          onAddTrack={handleAddTrack}
+          handlePlayPause={handlePlayPause}
+          currentPlayingTrack={currentPlayingTrack}
+        />
+        <Playlist 
+          name={playlistTitle} 
+          tracks={playlistTracks} 
+          onRemoveTrack={handleRemoveTrack} 
+          onTitleChange={changePlaylistTitle} 
+          onSave={handleSave} 
+          onSuccess={successMessage}
+          handlePlayPause={handlePlayPause}
+          currentPlayingTrack={currentPlayingTrack}
+        />
       </div>
     </div>
   );

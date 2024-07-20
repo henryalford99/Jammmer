@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Track = ({ track, onAddTrack, onRemoveTrack, isRemovable }) => {
+const Track = ({ track, onAddTrack, onRemoveTrack, isRemovable, handlePlayPause, isPlaying }) => {
     const handleAdd = () => {
         onAddTrack(track);
     };
@@ -10,7 +10,15 @@ const Track = ({ track, onAddTrack, onRemoveTrack, isRemovable }) => {
 
     return (
         <div className="Track">
-            <img src={track.image} alt={track.name} className="track-image"/>
+            <div className="album-cover">
+                <img className="track-image" src={track.image} alt={track.name} />
+                {track.preview_url && (
+                    <button className="play-button" onClick={handlePlayPause}>
+                        {isPlaying ? 'Pause' : 'Play'}
+                    </button>
+                )}
+            </div>
+            
             <div className="track-info">
                 <h3 className="track-name">{track.name}</h3>
                 <p className="track-details">{track.artist} | {track.album}</p>
