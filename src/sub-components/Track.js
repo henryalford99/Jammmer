@@ -10,11 +10,18 @@ const Track = ({ track, onAddTrack, onRemoveTrack, isRemovable }) => {
 
     return (
         <div className="Track">
-            <h3>{track.name}</h3>
-            <p>Artist: {track.artist}</p>
-            <p>Album: {track.album}</p>
-            {isRemovable ? (<button onClick={handleRemove}>Remove</button>) 
-            : (<button onClick={handleAdd}>Add</button>)}
+            <img src={track.image} alt={track.name} className="track-image"/>
+            <div className="track-info">
+                <h3 className="track-name">{track.name}</h3>
+                <p className="track-details">{track.artist} | {track.album}</p>
+            </div>
+            <div className="track-actions">
+                {isRemovable ? (
+                    <button onClick={handleRemove}>-</button>
+                ) : (
+                    <button onClick={handleAdd}>+</button>
+                )}
+            </div>
         </div>
     )
 };

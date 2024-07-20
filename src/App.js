@@ -9,7 +9,7 @@ function App() {
 
   const [searchResultsTracks, setSearchResultsTracks] = useState([]);
   const [playlistTracks, setPlaylistTracks] = useState([]);
-  const [playlistTitle, setPlaylistTitle] = useState('Playlist Name');
+  const [playlistTitle, setPlaylistTitle] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [isContentVisible, setIsContentVisible] = useState(false);
 
@@ -70,7 +70,7 @@ function App() {
       <h1 id="three">er</h1>
       <SearchBar onSearch={handleSearch} onChange={updateSearchTerm} value={searchTerm}/>
       <div className="content" style={{ display: isContentVisible ? 'flex' : 'none' }}>
-        <SearchResults name="Search Results" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
+        <SearchResults name="Results:" tracks={searchResultsTracks} onAddTrack={handleAddTrack}/>
         <Playlist name={playlistTitle} tracks={playlistTracks} onRemoveTrack={handleRemoveTrack} onTitleChange={changePlaylistTitle} onSave={handleSave}/>
       </div>
     </div>
