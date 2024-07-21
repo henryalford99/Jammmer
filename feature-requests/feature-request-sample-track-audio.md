@@ -42,8 +42,8 @@ A div element with the class name “album-cover” will be set up to contain an
 
 When complete, the interactive play button should look like this (play-icon and pause-icon states both shown below:
 
-    ![play icon](/feature-requests/play-icon.png)
-    ![pause icon](/feature-requests/pause-icon.png)
+    ![play icon](/feature-requests/images/play-icon.png)
+    ![pause icon](/feature-requests/images/pause-icon.png)
 
 
 ## CAVEATS
