@@ -1,6 +1,3 @@
-import Spotify from './Spotify';
-
-
 const SearchBar = ({ onSearch, value, onChange }) => {
     return (
         <form className="searchBar" onSubmit={onSearch}>
