@@ -40,10 +40,10 @@ Lastly, we will need to update our CSS to style the album cover and the play but
 
 A div element with the class name “album-cover” will be set up to contain an image element featuring the album cover, as well as the play button element. A constant height and width can be set for the “album-cover” div, with the child image element filling the parent div completely. The button element can then be offset using transform: translate syntax to render on top of the album cover image for each track.
 
-When complete, the interactive play button should look like this (play-icon and pause-icon states both shown below:
+When complete, the interactive play button should look like this (play-icon and pause-icon states both shown below:)
 
-    ![play icon](/feature-requests/images/play-icon.png)
-    ![pause icon](/feature-requests/images/pause-icon.png)
+![play icon](/feature-requests/images/play-icon.png)
+![pause icon](/feature-requests/images/pause-icon.png)
 
 
 ## CAVEATS
